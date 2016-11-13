@@ -1,0 +1,31 @@
+name: forestay
+version: '0.1.0.0'
+synopsis: A prelude alternative based on lifted-protolude
+description: Please see README.md
+category: Prelude
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2016 David Baynard
+license: Apache
+github: dbaynard/forestay
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Forestay
+  dependencies:
+  - base >=4.9 && <5
+  - lifted-protolude
+tests:
+  forestay-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - hspec
+    - forestay
