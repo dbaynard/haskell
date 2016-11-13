@@ -13,8 +13,12 @@ library:
   ghc-options: -Wall
   exposed-modules:
   - Forestay
+  - Forestay.Lens
+  reexported-modules:
+  - Protolude.Lifted
   dependencies:
   - base >=4.9 && <5
+  - lens
   - lifted-protolude
 tests:
   forestay-test:
