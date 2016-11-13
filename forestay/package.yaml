@@ -19,6 +19,7 @@ library:
   #- Unsafe
   dependencies:
   - base >=4.9 && <5
+  - ether
   - lens
   - lifted-protolude
 tests:

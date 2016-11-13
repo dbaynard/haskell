@@ -21,6 +21,7 @@ With this set of packages I can keep all that information up to date in a single
 > ― OED
 
 This is a custom prelude (hooray!) but at the moment it basically re-exports [lifted-protolude](https://github.com/parsonsmatt/lifted-protolude) and [lens](https://github.com/ekmett/lens).
+It also exports [ether](https://hackage.haskell.org/package/ether).
 
     {-# LANGUAGE OverloadedStrings #-}
 

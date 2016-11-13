@@ -32,6 +32,7 @@ library
       Paths_forestay
   build-depends:
       base >=4.9 && <5
+    , ether
     , lens
     , lifted-protolude
   default-language: Haskell2010
