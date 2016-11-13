@@ -7,7 +7,7 @@ author: David Baynard
 maintainer: davidbaynard@gmail.com
 copyright: 2016 David Baynard
 license: Apache
-github: dbaynard/readp
+github: dbaynard/haskell
 library:
   source-dirs: src
   ghc-options: -Wall

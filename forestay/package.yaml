@@ -7,15 +7,16 @@ author: David Baynard
 maintainer: davidbaynard@gmail.com
 copyright: 2016 David Baynard
 license: Apache
-github: dbaynard/forestay
+github: dbaynard/haskell
 library:
   source-dirs: src
   ghc-options: -Wall
   exposed-modules:
   - Forestay
   - Forestay.Lens
-  reexported-modules:
-  - Protolude.Lifted
+  #reexported-modules:
+  #- Protolude.Lifted
+  #- Unsafe
   dependencies:
   - base >=4.9 && <5
   - lens

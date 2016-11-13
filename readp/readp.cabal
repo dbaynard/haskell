@@ -7,8 +7,8 @@ version:        0.1.0.0
 synopsis:       Simplified ReadP parsing
 description:    Please see README.md
 category:       Prelude
-homepage:       https://github.com/dbaynard/readp#readme
-bug-reports:    https://github.com/dbaynard/readp/issues
+homepage:       https://github.com/dbaynard/haskell#readme
+bug-reports:    https://github.com/dbaynard/haskell/issues
 author:         David Baynard
 maintainer:     davidbaynard@gmail.com
 copyright:      2016 David Baynard
@@ -19,7 +19,7 @@ cabal-version:  >= 1.10
 
 source-repository head
   type: git
-  location: https://github.com/dbaynard/readp
+  location: https://github.com/dbaynard/haskell
 
 library
   hs-source-dirs:

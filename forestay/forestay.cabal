@@ -6,8 +6,8 @@ name:                forestay
 version:             0.1.0.0
 synopsis:            A prelude alternative based on lifted-protolude
 description:         Please see README.md
-homepage:            https://github.com/dbaynard/forestay#readme
-bug-reports:         https://github.com/dbaynard/forestay/issues
+homepage:            https://github.com/dbaynard/haskell#readme
+bug-reports:         https://github.com/dbaynard/haskell/issues
 license:             Apache
 license-file:        LICENSE
 author:              David Baynard
@@ -15,11 +15,11 @@ maintainer:          davidbaynard@gmail.com
 copyright:           2016 David Baynard
 category:            Prelude
 build-type:          Simple
-cabal-version:       >= 1.21
+cabal-version:       >= 1.10
 
 source-repository head
   type: git
-  location: https://github.com/dbaynard/forestay
+  location: https://github.com/dbaynard/haskell
 
 library
   hs-source-dirs:
@@ -30,8 +30,6 @@ library
       Forestay.Lens
   other-modules:
       Paths_forestay
-  reexported-modules:
-      Protolude.Lifted
   build-depends:
       base >=4.9 && <5
     , lens
