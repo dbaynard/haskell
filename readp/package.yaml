@@ -1,0 +1,34 @@
+name: readp
+version: '0.1.0.0'
+synopsis: Simplified ReadP parsing
+description: Please see README.md
+category: Prelude
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2016 David Baynard
+license: Apache
+github: dbaynard/readp
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Text.ReadP
+  dependencies:
+  - base >=4.7 && <5
+  - charset
+  - containers
+  - scientific
+  - text
+tests:
+  readp-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - hspec
+    - readp
