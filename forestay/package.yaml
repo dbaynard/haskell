@@ -13,15 +13,32 @@ library:
   ghc-options: -Wall
   exposed-modules:
   - Forestay
+  - Forestay.Containers
   - Forestay.Lens
   #reexported-modules:
   #- Protolude.Lifted
   #- Unsafe
+  #- Data.Array.Lens
+  #- Data.HashSet.Lens
+  #- Data.IntSet.Lens
+  #- Data.List.Lens
+  #- Data.Map.Lens
+  #- Data.Sequence.Lens
+  #- Data.Set.Lens
+  #- Data.Tree.Lens
+  #- Data.Vector.Lens
   dependencies:
   - base >=4.9 && <5
+  - containers
   - ether
+  - hashable
+  - hashable-time
   - lens
+  - lens-datetime
   - lifted-protolude
+  - time
+  - unordered-containers
+  - vector
 tests:
   forestay-test:
     main: Spec.hs

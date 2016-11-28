@@ -23,3 +23,10 @@ import Protolude.Lifted as X hiding
     )
 import Forestay.Lens as X
 import Control.Monad.Ether as X
+
+import Data.String as X (fromString, IsString, String)
+
+import Data.Data as X hiding (Fixity, Infix, Prefix)
+
+import Data.Time as X
+import Data.Hashable.Time as X
