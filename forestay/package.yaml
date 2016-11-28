@@ -18,6 +18,7 @@ library:
   #reexported-modules:
   #- Protolude.Lifted
   #- Unsafe
+  #- Control.Monad.Ether.Implicit
   #- Data.Array.Lens
   #- Data.HashSet.Lens
   #- Data.IntSet.Lens
@@ -26,6 +27,7 @@ library:
   #- Data.Sequence.Lens
   #- Data.Set.Lens
   #- Data.Tree.Lens
+  #- Data.Vector.Lens
   #- Data.Vector.Lens
   dependencies:
   - base >=4.9 && <5
@@ -36,6 +38,7 @@ library:
   - lens
   - lens-datetime
   - lifted-protolude
+  - tagged
   - time
   - unordered-containers
   - vector

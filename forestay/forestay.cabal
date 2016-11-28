@@ -40,6 +40,7 @@ library
     , lens
     , lens-datetime
     , lifted-protolude
+    , tagged
     , time
     , unordered-containers
     , vector

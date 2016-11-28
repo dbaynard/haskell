@@ -6,8 +6,16 @@ module Forestay.Lens (
   , module X
 )   where
 
-import Protolude.Lifted (State, execState)
-import Control.Lens as X
+import Protolude.Lifted
+    (  Proxy(Proxy)
+    )
+import Control.Lens as X hiding
+    ( (.=)
+    , (%=)
+    , (?=)
+    , (<>=)
+    , (<~)
+    )
 import Data.Text.Lens as X
 import Data.ByteString.Lens as X
 import Data.Data.Lens as X
@@ -32,19 +40,51 @@ import qualified Data.Time.Lens as Modified
     , seconds
     )
 
+import qualified Control.Monad.Ether.Implicit as Ether
+
 type s :~> a = Lens s s a a
 type s :~>> a = Traversal s s a a
 type s :~>: a = Prism s s a a
 type s :~~: a = Iso s s a a
 
-type Assign a = State a ()
+type Assign a = Ether.State a ()
+
+data Settings
+
+settings :: Proxy Settings
+settings = Proxy
+
+(.=) :: Ether.MonadState s m => ASetter s s a b -> b -> m ()
+l .= b = Ether.modify (l .~ b)
+infix 4 .=
+{-# INLINE (.=) #-}
+
+(<~) :: Ether.MonadState s m => ASetter s s a b -> m b -> m ()
+l <~ mb = mb >>= (l .=)
+infixr 2 <~
+{-# INLINE (<~) #-}
+
+(%=) :: Ether.MonadState s m => ASetter s s a b -> (a -> b) -> m ()
+l %= f = Ether.modify (l %~ f)
+infix 4 %=
+{-# INLINE (%=) #-}
+
+(?=) :: Ether.MonadState s m => ASetter s s a (Maybe b) -> b -> m ()
+l ?= b = Ether.modify (l ?~ b)
+infix 4 ?=
+{-# INLINE (?=) #-}
+
+(<>=) :: (Ether.MonadState s m, Monoid a) => ASetter' s a -> a -> m ()
+l <>= a = Ether.modify (l <>~ a)
+infix 4 <>=
+{-# INLINE (<>=) #-}
 
 def :: Assign a
 def = pure ()
 {-# INLINE def #-}
 
 makeAssign :: a -> Assign a -> a
-makeAssign = flip execState
+makeAssign = flip Ether.execState
 {-# INLINE makeAssign #-}
 
 (<-$) :: a -> Assign a -> a
