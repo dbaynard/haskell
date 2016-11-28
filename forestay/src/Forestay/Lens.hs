@@ -41,6 +41,7 @@ type Assign a = State a ()
 
 def :: Assign a
 def = pure ()
+{-# INLINE def #-}
 
 makeAssign :: a -> Assign a -> a
 makeAssign = flip execState
@@ -53,21 +54,28 @@ infixl 2 <-$
 
 fview :: Functor f => Getting a s a -> f s -> f a
 fview = fmap . view
+{-# INLINE fview #-}
 
 years' :: Dateable d => d :~> Integer
 years' = Modified.years
+{-# INLINE years' #-}
 
 months' :: Dateable d => d :~> Int
 months' = Modified.months
+{-# INLINE months' #-}
 
 days' :: Dateable d => d :~> Int
 days' = Modified.days
+{-# INLINE days' #-}
 
 hours' :: Timeable t => t :~> Int
 hours' = Modified.hours
+{-# INLINE hours' #-}
 
 minutes' :: Timeable t => t :~> Int
 minutes' = Modified.minutes
+{-# INLINE minutes' #-}
 
 seconds' :: Timeable t => t :~> Pico
 seconds' = Modified.seconds
+{-# INLINE seconds' #-}
