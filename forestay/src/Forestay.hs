@@ -2,6 +2,7 @@
 
 module Forestay (
     module X
+  , parseDefaultTime
 )   where
 
 import Protolude.Lifted as X hiding
@@ -33,3 +34,15 @@ import Data.Data as X hiding (Fixity, Infix, Prefix)
 
 import Data.Time as X
 import Data.Hashable.Time as X
+
+import Forestay.ListT as X
+
+{-|
+  A good way to enter times into data structures.
+
+  Combine with 'runIdentity' for static structures.
+-}
+parseDefaultTime :: (Monad m, ParseTime t) => String -> m t
+parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
+{-# INLINE parseDefaultTime #-}
+

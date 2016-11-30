@@ -29,6 +29,7 @@ library
       Forestay
       Forestay.Containers
       Forestay.Lens
+      Forestay.ListT
   other-modules:
       Paths_forestay
   build-depends:
@@ -40,6 +41,7 @@ library
     , lens
     , lens-datetime
     , lifted-protolude
+    , list-transformer
     , tagged
     , time
     , unordered-containers

@@ -50,7 +50,6 @@ type s :~~: a = Iso s s a a
 type Assign a = Ether.State a ()
 
 data Settings
-
 settings :: Proxy Settings
 settings = Proxy
 

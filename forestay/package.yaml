@@ -15,6 +15,7 @@ library:
   - Forestay
   - Forestay.Containers
   - Forestay.Lens
+  - Forestay.ListT
   #reexported-modules:
   #- Protolude.Lifted
   #- Unsafe
@@ -38,6 +39,7 @@ library:
   - lens
   - lens-datetime
   - lifted-protolude
+  - list-transformer
   - tagged
   - time
   - unordered-containers
