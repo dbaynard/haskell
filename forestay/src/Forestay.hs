@@ -1,8 +1,11 @@
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE DataKinds #-}
 
 module Forestay (
     module X
   , parseDefaultTime
+  , ether
 )   where
 
 import Protolude.Lifted as X hiding
@@ -34,6 +37,8 @@ import Data.String as X (fromString, IsString, String)
 
 import Data.Data as X hiding (Fixity, Infix, Prefix)
 
+import Data.Coerce (coerce)
+
 import Data.Time as X
 import Data.Hashable.Time as X
 
@@ -46,3 +51,6 @@ parseDefaultTime :: (Monad m, ParseTime t) => String -> m t
 parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
 {-# INLINE parseDefaultTime #-}
 
+ether :: Coercible a (DispatchT ('TagAttach tag) m b) => proxy tag -> a -> m b
+ether tag = tagAttach tag . coerce
+{-# INLINE ether #-}
