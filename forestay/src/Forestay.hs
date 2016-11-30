@@ -4,6 +4,7 @@
 
 module Forestay (
     module X
+  , id
   , parseDefaultTime
   , ether
 )   where
@@ -41,6 +42,12 @@ import Data.Coerce (coerce)
 
 import Data.Time as X
 import Data.Hashable.Time as X
+
+import ReadArgs as X
+
+id :: a -> a
+id = identity
+{-# INLINE id #-}
 
 {-|
   A good way to enter times into data structures.

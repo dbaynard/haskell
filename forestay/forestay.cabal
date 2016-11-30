@@ -35,6 +35,7 @@ library
       Paths_forestay
   build-depends:
       base >=4.9 && <5
+    , ReadArgs
     , containers
     , errors
     , ether

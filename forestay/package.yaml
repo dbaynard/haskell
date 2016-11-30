@@ -31,6 +31,7 @@ library:
   #- Data.Vector.Lens
   dependencies:
   - base >=4.9 && <5
+  - ReadArgs
   - containers
   - errors
   - ether

@@ -3,16 +3,19 @@
 
 module Forestay.ListT (
     module Forestay.ListT
-  , Step()
-  , select
+  , module X
 )   where
 
 import Protolude.Lifted
 
-import List.Transformer
-    ( ListT
-    , Step
-    , select
+import List.Transformer as X hiding
+    ( next
+    , unfold
+    , drop
+    , take
+    , zip
+    , fold
+    , foldM
     )
 import qualified List.Transformer as LT
 
