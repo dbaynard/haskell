@@ -7,6 +7,8 @@ module Forestay (
   , id
   , parseDefaultTime
   , ether
+  , parseAnArg
+  , nameAnArg
 )   where
 
 import Protolude.Lifted as X hiding
@@ -43,7 +45,14 @@ import Data.Coerce (coerce)
 import Data.Time as X
 import Data.Hashable.Time as X
 
-import ReadArgs as X
+import ReadArgs as X hiding
+    ( parse
+    , name
+    )
+import qualified ReadArgs
+    ( parse
+    , name
+    )
 
 id :: a -> a
 id = identity
@@ -61,3 +70,15 @@ parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
 ether :: Coercible a (DispatchT ('TagAttach tag) m b) => proxy tag -> a -> m b
 ether tag = tagAttach tag . coerce
 {-# INLINE ether #-}
+
+--------------------------------------------------
+-- * ReadArgs
+--------------------------------------------------
+
+parseAnArg :: Arguable a => String -> Maybe a
+parseAnArg = ReadArgs.parse
+{-# INLINE parseAnArg #-}
+
+nameAnArg :: Arguable a => a -> String
+nameAnArg = ReadArgs.name
+{-# INLINE nameAnArg #-}
