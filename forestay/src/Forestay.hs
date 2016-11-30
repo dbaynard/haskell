@@ -22,7 +22,9 @@ import Protolude.Lifted as X hiding
     , evalState, evalStateT, runState, runStateT, execState, execStateT
     , runExcept, runExceptT
     )
+import Forestay.Error as X
 import Forestay.Lens as X
+import Forestay.ListT as X
 
 import Control.Monad.Ether as X
 import Control.Ether.Abbr as X
@@ -34,8 +36,6 @@ import Data.Data as X hiding (Fixity, Infix, Prefix)
 
 import Data.Time as X
 import Data.Hashable.Time as X
-
-import Forestay.ListT as X
 
 {-|
   A good way to enter times into data structures.

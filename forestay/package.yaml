@@ -15,7 +15,6 @@ library:
   - Forestay
   - Forestay.Containers
   - Forestay.Lens
-  - Forestay.ListT
   #reexported-modules:
   #- Protolude.Lifted
   #- Unsafe
@@ -33,6 +32,7 @@ library:
   dependencies:
   - base >=4.9 && <5
   - containers
+  - errors
   - ether
   - hashable
   - hashable-time

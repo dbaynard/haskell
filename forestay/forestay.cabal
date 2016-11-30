@@ -29,12 +29,14 @@ library
       Forestay
       Forestay.Containers
       Forestay.Lens
-      Forestay.ListT
   other-modules:
+      Forestay.Error
+      Forestay.ListT
       Paths_forestay
   build-depends:
       base >=4.9 && <5
     , containers
+    , errors
     , ether
     , hashable
     , hashable-time
