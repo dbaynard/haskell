@@ -60,7 +60,6 @@ import Pipes.Prelude as X hiding
     , unfoldr
     , zip
     , zipWith
-    ,
     )
 
 import qualified Pipes.Parse as Pipes
@@ -74,6 +73,7 @@ import Pipes.Parse as X hiding
     , skip, draw, skipAll, drawAll, unDraw, peek, isEndOfInput
     )
 
+import qualified Pipes.Text as PT
 import Pipes.Text as X hiding
     ( all
     , any
@@ -118,6 +118,7 @@ import Pipes.Text as X hiding
     , words
     )
 
+import qualified Pipes.ByteString as PB
 import Pipes.ByteString as X hiding
     ( all
     , any
@@ -253,3 +254,16 @@ peekP = Pipes.peek
 isEndOfInputP :: Monad m => Parser a m Bool
 isEndOfInputP = Pipes.isEndOfInput
 {-# INLINE isEndOfInputP #-}
+
+--------------------------------------------------
+-- * ByteString
+--------------------------------------------------
+
+stdinB :: MonadIO m => Producer' ByteString m ()
+stdinB = PB.stdin
+{-# INLINE stdinB #-}
+
+stdoutB :: MonadIO m => Consumer' ByteString m ()
+stdoutB = PB.stdout
+{-# INLINE stdoutB #-}
+

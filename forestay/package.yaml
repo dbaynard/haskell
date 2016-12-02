@@ -17,6 +17,8 @@ library:
   - Forestay.Lens
   - Forestay.Pipes
   #reexported-modules:
+  #- Pipes.Text
+  #- Pipes.ByteString
   #- Protolude.Lifted
   #- Unsafe
   #- Control.Monad.Ether.Implicit
