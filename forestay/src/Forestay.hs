@@ -36,9 +36,7 @@ import Control.Monad.Ether as X
 import Control.Ether.Abbr as X
 import Data.Tagged as X
 
-import Data.String as X (fromString, IsString, String)
-
-import Data.Data as X hiding (Fixity, Infix, Prefix)
+import Data.Functor.Foldable as X
 
 import Data.Coerce (coerce)
 

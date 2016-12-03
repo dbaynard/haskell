@@ -6,16 +6,22 @@ module Forestay.Data (
     module X
   , id
   , parseDefaultTime
+  , foldm
 )   where
 
+import qualified Protolude.Lifted as Proto
 import Protolude.Lifted as X hiding
     ( from
+    , fold
     )
 import Forestay.BaseNByteString as X
 
 import Data.String as X (fromString, IsString, String)
 
-import Data.Data as X hiding (Fixity, Infix, Prefix)
+import Data.Data as X hiding
+    ( Fixity, Infix, Prefix
+    , gunfold
+    )
 
 import Data.Time as X
 import Data.Hashable.Time as X
@@ -32,3 +38,8 @@ id = identity
 parseDefaultTime :: (Monad m, ParseTime t) => String -> m t
 parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
 {-# INLINE parseDefaultTime #-}
+
+foldm :: (Foldable t, Monoid m) => t m -> m
+foldm = Proto.fold
+{-# INLINE foldm #-}
+

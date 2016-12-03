@@ -49,6 +49,7 @@ library
     , pipes-bytestring
     , pipes-parse
     , pipes-text
+    , recursion-schemes
     , tagged
     , unordered-containers
     , vector

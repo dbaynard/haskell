@@ -16,6 +16,7 @@ import Control.Lens as X hiding
     , (<>=)
     , (<~)
     , (??)
+    , para
     )
 import Data.Text.Lens as X
 import Data.ByteString.Lens as X

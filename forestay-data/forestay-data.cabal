@@ -39,7 +39,6 @@ library
       Forestay.Lens.Definition
   other-modules:
       Forestay.BaseNByteString
-      Forestay.Lens.Simple
       Paths_forestay_data
   default-language: Haskell2010
 
