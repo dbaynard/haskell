@@ -31,12 +31,15 @@ library
       Forestay.Lens
       Forestay.Pipes
   other-modules:
+      Forestay.BaseNByteString
       Forestay.Error
       Forestay.ListT
       Paths_forestay
   build-depends:
       base >=4.9 && <5
     , ReadArgs
+    , base16-bytestring
+    , base64-bytestring
     , containers
     , errors
     , ether

@@ -35,6 +35,8 @@ library:
   dependencies:
   - base >=4.9 && <5
   - ReadArgs
+  - base16-bytestring
+  - base64-bytestring
   - containers
   - errors
   - ether
