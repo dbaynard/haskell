@@ -10,6 +10,8 @@ module Forestay.Pipes (
 import Forestay.Data
 import Forestay.Lens
 
+import Data.IOData
+
 import qualified Pipes
 import Pipes as X hiding
     ( Proxy
@@ -170,6 +172,10 @@ import Pipes.ByteString as X hiding
     , word
     , words
     )
+
+--------------------------------------------------
+-- * Pipes
+--------------------------------------------------
 
 type PProxy = Pipes.Proxy
 

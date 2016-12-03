@@ -4,8 +4,6 @@
 
 module Forestay (
     module X
-  , id
-  , parseDefaultTime
   , ether
   , parseAnArg
   , nameAnArg
@@ -16,7 +14,6 @@ import Forestay.Data as X hiding
     , uncons
     , unsnoc
     , to
-    , from
     , (<.>)
     , (&)
     , (<$!>)
@@ -27,6 +24,7 @@ import Forestay.Data as X hiding
     , runReader, runReaderT
     , evalState, evalStateT, runState, runStateT, execState, execStateT
     , runExcept, runExceptT
+    , getLine, readFile, writeFile -- chunked-data
     )
 import Forestay.Error as X
 import Forestay.Lens as X
@@ -39,6 +37,8 @@ import Data.Tagged as X
 import Data.Functor.Foldable as X
 
 import Data.Coerce (coerce)
+
+import Data.IOData as X
 
 import ReadArgs as X hiding
     ( parse
