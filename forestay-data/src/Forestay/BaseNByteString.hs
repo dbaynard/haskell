@@ -1,6 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude, OverloadedStrings, ApplicativeDo, PartialTypeSignatures #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving, DeriveDataTypeable, DeriveGeneric #-}
-{-# LANGUAGE TypeOperators #-}
 
 module Forestay.BaseNByteString (
     Base16()
@@ -33,8 +32,6 @@ import Data.Data
 
 import Data.String (String)
 
-import Forestay.Lens
-
 import qualified Data.ByteString.Base16 as B4
 import qualified Data.ByteString.Base64 as B6
 import qualified Data.ByteString.Base64.URL as BU
@@ -44,22 +41,22 @@ import qualified Data.ByteString.Base64.Lazy as B6L
 import qualified Data.ByteString.Base64.URL.Lazy as BUL
 
 newtype Base16 = MakeBase16 { _base16 :: ByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 newtype Base64 = MakeBase64 { _base64 :: ByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 newtype Base64URL = MakeBase64URL { _base64URL :: ByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 newtype LBase16 = MakeLBase16 { _lBase16 :: LByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 newtype LBase64 = MakeLBase64 { _lBase64 :: LByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 newtype LBase64URL = MakeLBase64URL { _lBase64URL :: LByteString }
-        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print, Reversing)
+        deriving (Eq, Ord, Read, Show, Generic, Data, Typeable, NFData, IsString, Monoid, Semigroup, Print)
 
 encodeBase16 :: ByteString -> Base16
 encodeBase16 = MakeBase16 . B4.encode

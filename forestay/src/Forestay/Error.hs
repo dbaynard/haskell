@@ -4,7 +4,7 @@ module Forestay.Error (
     module X
 )   where
 
-import Protolude.Lifted
+import Forestay.Data
 
 import Control.Error.Safe as X hiding
     ( tryJust

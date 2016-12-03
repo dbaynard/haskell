@@ -34,24 +34,20 @@ library:
   #- Data.Vector.Lens
   dependencies:
   - base >=4.9 && <5
+  - forestay-data
   - ReadArgs
-  - base16-bytestring
-  - base64-bytestring
   - containers
   - errors
   - ether
   - hashable
-  - hashable-time
   - lens
   - lens-datetime
-  - lifted-protolude
   - list-transformer
   - pipes
   - pipes-bytestring
   - pipes-parse
   - pipes-text
   - tagged
-  - time
   - unordered-containers
   - vector
 tests:

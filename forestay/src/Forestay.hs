@@ -11,7 +11,7 @@ module Forestay (
   , nameAnArg
 )   where
 
-import Protolude.Lifted as X hiding
+import Forestay.Data as X hiding
     ( Leniency(..)
     , uncons
     , unsnoc
@@ -30,9 +30,7 @@ import Protolude.Lifted as X hiding
     )
 import Forestay.Error as X
 import Forestay.Lens as X
-{-import Forestay.ListT as X-}
 import Forestay.Pipes as X
-import Forestay.BaseNByteString as X
 
 import Control.Monad.Ether as X
 import Control.Ether.Abbr as X
@@ -44,9 +42,6 @@ import Data.Data as X hiding (Fixity, Infix, Prefix)
 
 import Data.Coerce (coerce)
 
-import Data.Time as X
-import Data.Hashable.Time as X
-
 import ReadArgs as X hiding
     ( parse
     , name
@@ -55,19 +50,6 @@ import qualified ReadArgs
     ( parse
     , name
     )
-
-id :: a -> a
-id = identity
-{-# INLINE id #-}
-
-{-|
-  A good way to enter times into data structures.
-
-  Combine with 'runIdentity' for static structures.
--}
-parseDefaultTime :: (Monad m, ParseTime t) => String -> m t
-parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
-{-# INLINE parseDefaultTime #-}
 
 ether :: Coercible a (DispatchT ('TagAttach tag) m b) => proxy tag -> a -> m b
 ether tag = tagAttach tag . coerce

@@ -7,7 +7,7 @@ module Forestay.Pipes (
   , module X
 )   where
 
-import Protolude.Lifted
+import Forestay.Data
 import Forestay.Lens
 
 import qualified Pipes

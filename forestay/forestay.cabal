@@ -31,30 +31,25 @@ library
       Forestay.Lens
       Forestay.Pipes
   other-modules:
-      Forestay.BaseNByteString
       Forestay.Error
       Forestay.ListT
       Paths_forestay
   build-depends:
       base >=4.9 && <5
+    , forestay-data
     , ReadArgs
-    , base16-bytestring
-    , base64-bytestring
     , containers
     , errors
     , ether
     , hashable
-    , hashable-time
     , lens
     , lens-datetime
-    , lifted-protolude
     , list-transformer
     , pipes
     , pipes-bytestring
     , pipes-parse
     , pipes-text
     , tagged
-    , time
     , unordered-containers
     , vector
   default-language: Haskell2010

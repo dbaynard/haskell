@@ -1,0 +1,38 @@
+name: forestay-data
+version: '0.1.0.0'
+synopsis: A prelude based on lifted-protolude for defining data types
+description: Please see README.md
+category: Prelude
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2016 David Baynard
+license: Apache
+github: dbaynard/haskell
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Forestay.Data
+  - Forestay.Lens.Definition
+  dependencies:
+  - base >=4.9 && <5
+  - base16-bytestring
+  - base64-bytestring
+  - hashable
+  - hashable-time
+  - lifted-protolude
+  - profunctors
+  - time
+tests:
+  forestay-data-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - hspec
+    - forestay-data

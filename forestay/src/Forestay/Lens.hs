@@ -6,7 +6,7 @@ module Forestay.Lens (
   , module X
 )   where
 
-import Protolude.Lifted
+import Forestay.Data
     (  Proxy(Proxy)
     )
 import Control.Lens as X hiding

@@ -6,7 +6,7 @@ module Forestay.ListT (
   , module X
 )   where
 
-import Protolude.Lifted
+import Forestay.Data
 
 import List.Transformer as X hiding
     ( next
