@@ -14,6 +14,7 @@ library:
   exposed-modules:
   - Forestay.Data
   - Forestay.Lens.Definition
+  - Forestay.Pretty
   dependencies:
   - base >=4.9 && <5
   - base16-bytestring
@@ -24,6 +25,7 @@ library:
   - lifted-protolude
   - profunctors
   - time
+  - wl-pprint-text
 tests:
   forestay-data-test:
     main: Spec.hs
