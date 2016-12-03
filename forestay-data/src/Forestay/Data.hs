@@ -23,6 +23,22 @@ import Data.Data as X hiding
     , gunfold
     )
 
+import Data.DList as X hiding
+    ( toList
+    , concat
+    , map
+    , foldr
+    , head
+    , unfoldr
+    , empty
+    , list
+    , replicate
+    , Cons
+    , Nil
+    , cons
+    , snoc
+    )
+
 import Data.Time as X
 import Data.Hashable.Time as X
 
