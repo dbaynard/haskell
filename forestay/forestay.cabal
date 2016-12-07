@@ -29,10 +29,10 @@ library
       Forestay
       Forestay.Containers
       Forestay.Lens
+      Forestay.ListT
       Forestay.Pipes
   other-modules:
       Forestay.Error
-      Forestay.ListT
       Paths_forestay
   build-depends:
       base >=4.9 && <5

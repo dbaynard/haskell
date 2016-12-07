@@ -15,6 +15,7 @@ library:
   - Forestay
   - Forestay.Containers
   - Forestay.Lens
+  - Forestay.ListT
   - Forestay.Pipes
   #reexported-modules:
   #- Pipes.Text
