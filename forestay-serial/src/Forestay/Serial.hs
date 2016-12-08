@@ -19,6 +19,7 @@ import Data.Aeson as X hiding
     ( encode
     , decode
     )
+import Data.Aeson.Types as X
 
 import Data.Aeson.Lens as X
 
