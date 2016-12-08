@@ -4,6 +4,7 @@ module Forestay.Serial (
     module X
   , MPObject
   , ProtoVal
+  , AesonOptions
   , encodeJSON
   , decodeJSON
   , encodeYaml
@@ -19,7 +20,10 @@ import Data.Aeson as X hiding
     ( encode
     , decode
     )
-import Data.Aeson.Types as X
+import qualified Data.Aeson.Types as A
+import Data.Aeson.Types as X hiding
+    ( Options
+    )
 
 import Data.Aeson.Lens as X
 
@@ -52,6 +56,8 @@ import Data.Serialize
 type MPObject = M.Object
 
 type ProtoVal = P.Value
+
+type AesonOptions = A.Options
 
 encodeJSON :: ToJSON a => a -> LByteString
 encodeJSON = A.encode
