@@ -16,7 +16,7 @@ library:
   dependencies:
   - base >=4.9 && <5
   - forestay-data
-  - aeson
+  - aeson >= 1.0.0.0
   - cereal
   - data-msgpack
   - lens-aeson
