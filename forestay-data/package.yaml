@@ -13,6 +13,7 @@ library:
   ghc-options: -Wall
   exposed-modules:
   - Forestay.Data
+  - Forestay.Deriving.Monoid
   - Forestay.Lens.Definition
   - Forestay.Pretty
   dependencies:

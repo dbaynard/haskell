@@ -38,6 +38,7 @@ library
     , wl-pprint-text
   exposed-modules:
       Forestay.Data
+      Forestay.Deriving.Monoid
       Forestay.Lens.Definition
       Forestay.Pretty
   other-modules:
