@@ -52,6 +52,8 @@ import Pipes.Prelude as X hiding
     , print
     , product
     , replicateM
+    , read
+    , readLn
     , seq
     , sequence
     , show
