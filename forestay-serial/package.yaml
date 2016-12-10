@@ -18,6 +18,7 @@ library:
   - forestay-data
   - aeson >= 1.0.0.0
   - binary
+  - cassava
   - cereal
   - data-msgpack
   - lens-aeson
