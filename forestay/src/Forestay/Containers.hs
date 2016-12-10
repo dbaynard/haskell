@@ -7,6 +7,7 @@ module Forestay.Containers (
   , intSetOf
   , hashSetmapped
   , intSetmapped
+  , intMembers
   , vectorSliced
 )   where
 
@@ -14,10 +15,6 @@ import Forestay.Lens
 import Forestay.Data
 
 import Data.Array.Lens as X
-import Data.IntSet.Lens as X hiding
-    ( setOf
-    , setmapped
-    )
 import Data.List.Lens as X
 import Data.Sequence.Lens as X
 import Data.Set.Lens as X
@@ -43,6 +40,7 @@ import qualified Data.HashSet.Lens as HashSet
 import qualified Data.IntSet.Lens as IntSet
     ( setOf
     , setmapped
+    , members
     )
 import qualified Data.Vector.Lens as Vector
     ( sliced
@@ -63,6 +61,10 @@ hashSetmapped = HashSet.setmapped
 intSetmapped :: IndexPreservingSetter' IntSet Int
 intSetmapped = IntSet.setmapped
 {-# INLINE intSetmapped #-}
+
+intMembers :: Fold IntSet Int
+intMembers = IntSet.members
+{-# INLINE intMembers #-}
 
 vectorSliced :: Int -> Int -> Vector a :~> Vector a
 vectorSliced = Vector.sliced

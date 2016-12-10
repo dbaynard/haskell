@@ -1,4 +1,5 @@
 {-# LANGUAGE NoImplicitPrelude, OverloadedStrings, ApplicativeDo, PartialTypeSignatures #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 module Forestay.Serial (
     module X
@@ -35,7 +36,12 @@ import Data.Aeson.Types as X hiding
     , (.=)
     )
 
-import Data.Aeson.Lens as X
+import qualified Data.Aeson.Lens as A
+    ( members
+    )
+import Data.Aeson.Lens as X hiding
+    ( members
+    )
 
 import qualified Data.Csv as C
 import Data.Csv as X hiding
@@ -72,6 +78,9 @@ import Data.Yaml as X hiding
 
 import Data.HashMap.Strict
 import Data.Serialize
+import Control.Lens.Type
+    ( IndexedTraversal'
+    )
 
 type AesonOptions = A.Options
 type AesonParser = A.Parser
@@ -115,4 +124,8 @@ encodeProtoBuf = P.encode
 decodeProtoBuf :: Decode a => HashMap Tag [WireField] -> Get a
 decodeProtoBuf = P.decode
 {-# INLINE decodeProtoBuf #-}
+
+aesonMembers :: AsValue t => IndexedTraversal' Text t Value
+aesonMembers = A.members
+{-# INLINE aesonMembers #-}
 

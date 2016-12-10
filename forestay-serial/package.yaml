@@ -21,6 +21,7 @@ library:
   - cassava
   - cereal
   - data-msgpack
+  - lens
   - lens-aeson
   - protobuf
   - unordered-containers
