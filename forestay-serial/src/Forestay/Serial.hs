@@ -3,6 +3,7 @@
 module Forestay.Serial (
     module X
   , AesonOptions
+  , AesonParser
   , CsvField
   , CsvParser
   , ProtoField
@@ -25,10 +26,13 @@ import qualified Data.Aeson as A
 import Data.Aeson as X hiding
     ( encode
     , decode
+    , (.=)
     )
 import qualified Data.Aeson.Types as A
 import Data.Aeson.Types as X hiding
     ( Options
+    , Parser
+    , (.=)
     )
 
 import Data.Aeson.Lens as X
@@ -41,6 +45,7 @@ import Data.Csv as X hiding
     , Field
     , (.:)
     , (.=)
+    , index
     )
 
 import qualified Data.ProtocolBuffers as P
@@ -69,6 +74,7 @@ import Data.HashMap.Strict
 import Data.Serialize
 
 type AesonOptions = A.Options
+type AesonParser = A.Parser
 
 type CsvParser = C.Parser
 type CsvField = C.Field
