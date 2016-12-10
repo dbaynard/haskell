@@ -2,11 +2,16 @@
 {-# LANGUAGE TypeOperators, RankNTypes #-}
 
 module Forestay.Containers (
-    module Forestay.Containers
-  , module X
+    module X
+  , hashSetOf
+  , intSetOf
+  , hashSetmapped
+  , intSetmapped
+  , vectorSliced
 )   where
 
 import Forestay.Lens
+import Forestay.Data
 
 import Data.Array.Lens as X
 import Data.IntSet.Lens as X hiding
@@ -21,9 +26,6 @@ import Data.Vector.Lens as X hiding
     ( sliced
     )
 
-import Data.Vector as X
-    ( Vector
-    )
 import Data.HashSet as X
     ( HashSet
     )
@@ -48,15 +50,21 @@ import qualified Data.Vector.Lens as Vector
 
 hashSetOf :: Hashable a => Getting (HashSet a) s a -> s -> HashSet a
 hashSetOf = HashSet.setOf
+{-# INLINE hashSetOf #-}
 
 intSetOf :: Getting IntSet s Int -> s -> IntSet
 intSetOf = IntSet.setOf
+{-# INLINE intSetOf #-}
 
 hashSetmapped :: (Eq j, Hashable j) => IndexPreservingSetter (HashSet i) (HashSet j) i j
 hashSetmapped = HashSet.setmapped
+{-# INLINE hashSetmapped #-}
 
 intSetmapped :: IndexPreservingSetter' IntSet Int
 intSetmapped = IntSet.setmapped
+{-# INLINE intSetmapped #-}
 
 vectorSliced :: Int -> Int -> Vector a :~> Vector a
 vectorSliced = Vector.sliced
+{-# INLINE vectorSliced #-}
+

@@ -35,6 +35,7 @@ library
     , lifted-protolude
     , profunctors
     , time
+    , vector
     , wl-pprint-text
   exposed-modules:
       Forestay.Data

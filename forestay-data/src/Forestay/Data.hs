@@ -39,6 +39,10 @@ import Data.DList as X hiding
     , snoc
     )
 
+import Data.Vector as X
+    ( Vector
+    )
+
 import Data.Time as X
 import Data.Hashable.Time as X
 

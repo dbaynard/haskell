@@ -52,7 +52,6 @@ library:
   - recursion-schemes
   - tagged
   - unordered-containers
-  - vector
 tests:
   forestay-test:
     main: Spec.hs
