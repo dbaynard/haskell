@@ -1,0 +1,32 @@
+name: forestay-all
+version: '0.1.0.0'
+synopsis: Export all forestay universe exports
+description: Please see README.md
+category: Prelude
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2016 David Baynard
+license: Apache
+github: dbaynard/haskell
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Forestay.All
+  dependencies:
+  - base >=4.9 && <5
+  - forestay
+  - forestay-serial
+tests:
+  forestay-data-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - hspec
+    - forestay-all
