@@ -2,7 +2,6 @@
 
 module Forestay.Serial (
     module X
-  , MPObject
   , ProtoVal
   , AesonOptions
   , encodeJSON
@@ -11,10 +10,10 @@ module Forestay.Serial (
   , decodeYaml
   , encodeProtoBuf
   , decodeProtoBuf
-  , putStrPut
 )   where
 
 import Forestay.Data
+import Forestay.Serial.MessagePack as X
 
 import qualified Data.Aeson as A
 import Data.Aeson as X hiding
@@ -27,12 +26,6 @@ import Data.Aeson.Types as X hiding
     )
 
 import Data.Aeson.Lens as X
-
-import qualified Data.MessagePack as M
-import Data.MessagePack as X hiding
-    ( Object()
-    , putStr
-    )
 
 import qualified Data.ProtocolBuffers as P
 import Data.ProtocolBuffers as X hiding
@@ -54,8 +47,6 @@ import Data.Yaml as X hiding
 
 import Data.HashMap.Strict
 import Data.Serialize
-
-type MPObject = M.Object
 
 type ProtoVal = P.Value
 
@@ -84,8 +75,4 @@ encodeProtoBuf = P.encode
 decodeProtoBuf :: Decode a => HashMap Tag [WireField] -> Get a
 decodeProtoBuf = P.decode
 {-# INLINE decodeProtoBuf #-}
-
-putStrPut :: Text -> _Put
-putStrPut = M.putStr
-{-# INLINE putStrPut #-}
 
