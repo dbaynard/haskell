@@ -11,6 +11,7 @@ module Forestay.Serial (
   , decodeYaml
   , encodeProtoBuf
   , decodeProtoBuf
+  , putStrPut
 )   where
 
 import Forestay.Data
@@ -30,6 +31,7 @@ import Data.Aeson.Lens as X
 import qualified Data.MessagePack as M
 import Data.MessagePack as X hiding
     ( Object()
+    , putStr
     )
 
 import qualified Data.ProtocolBuffers as P
@@ -77,8 +79,13 @@ decodeYaml = Y.decode
 
 encodeProtoBuf :: Encode a => a -> Put
 encodeProtoBuf = P.encode
+{-# INLINE encodeProtoBuf #-}
 
 decodeProtoBuf :: Decode a => HashMap Tag [WireField] -> Get a
 decodeProtoBuf = P.decode
+{-# INLINE decodeProtoBuf #-}
 
+putStrPut :: Text -> _Put
+putStrPut = M.putStr
+{-# INLINE putStrPut #-}
 
