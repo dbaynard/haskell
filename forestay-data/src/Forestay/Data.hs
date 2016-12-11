@@ -46,6 +46,10 @@ import Data.Vector as X
 import Data.Time as X
 import Data.Hashable.Time as X
 
+import Safe as X hiding
+    ( at
+    )
+
 id :: a -> a
 id = identity
 {-# INLINE id #-}

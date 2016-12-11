@@ -35,6 +35,7 @@ library
     , lifted-protolude
     , profunctors
     , time
+    , safe
     , vector
     , wl-pprint-text
   exposed-modules:

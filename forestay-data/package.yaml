@@ -26,6 +26,7 @@ library:
   - lifted-protolude
   - profunctors
   - time
+  - safe
   - vector
   - wl-pprint-text
 tests:
