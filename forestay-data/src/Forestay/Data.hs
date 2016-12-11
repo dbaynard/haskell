@@ -4,9 +4,10 @@
 
 module Forestay.Data (
     module X
-  , id
-  , parseDefaultTime
   , foldm
+  , id
+  , liftMaybe
+  , parseDefaultTime
 )   where
 
 import qualified Protolude.Lifted as Proto
@@ -66,4 +67,8 @@ parseDefaultTime = parseTimeM True defaultTimeLocale "%0Y-%m-%d %H:%M:%S %Z"
 foldm :: (Foldable t, Monoid m) => t m -> m
 foldm = Proto.fold
 {-# INLINE foldm #-}
+
+liftMaybe :: Alternative f => Maybe a -> f a
+liftMaybe = maybe empty pure
+{-# INLINE liftMaybe #-}
 
