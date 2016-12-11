@@ -9,6 +9,7 @@ module Forestay.Lens (
 import Forestay.Data
     (  Proxy(Proxy)
     )
+import qualified Control.Lens as L
 import Control.Lens as X hiding
     ( (.=)
     , (%=)
@@ -17,11 +18,18 @@ import Control.Lens as X hiding
     , (<~)
     , (??)
     , para
+    , noneOf
     )
 import Data.Text.Lens as X
 import Data.ByteString.Lens as X
 import Data.Data.Lens as X
-import Numeric.Lens as X
+import qualified Numeric.Lens as L
+import Numeric.Lens as X hiding
+    ( binary
+    , octal
+    , decimal
+    , hex
+    )
 import System.FilePath.Lens as X
 import Data.Time.Lens as X hiding
     ( years
@@ -43,6 +51,7 @@ import qualified Data.Time.Lens as Modified
     )
 
 import qualified Control.Monad.Ether.Implicit as Ether
+import Data.Monoid (Any)
 
 type s :~> a = Lens s s a a
 type s :~>> a = Traversal s s a a
@@ -120,3 +129,24 @@ minutes' = Modified.minutes
 seconds' :: Timeable t => t :~> Pico
 seconds' = Modified.seconds
 {-# INLINE seconds' #-}
+
+noneOf' :: Getting Any s a -> (a -> Bool) -> s -> Bool
+noneOf' = L.noneOf
+{-# INLINE noneOf' #-}
+
+binary' :: Integral a => Prism' String a
+binary' = L.binary
+{-# INLINE binary' #-}
+
+octal' :: Integral a => Prism' String a
+octal' = L.octal
+{-# INLINE octal' #-}
+
+decimal' :: Integral a => Prism' String a
+decimal' = L.decimal
+{-# INLINE decimal' #-}
+
+hex' :: Integral a => Prism' String a
+hex' = L.hex
+{-# INLINE hex' #-}
+

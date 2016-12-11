@@ -18,6 +18,8 @@ module Forestay.Serial (
   , decodeYaml
   , encodeProtoBuf
   , decodeProtoBuf
+  , aesonMembers
+  , runAesonParse
 )   where
 
 import Forestay.Data
@@ -28,12 +30,15 @@ import Data.Aeson as X hiding
     ( encode
     , decode
     , (.=)
+    , Result
     )
 import qualified Data.Aeson.Types as A
 import Data.Aeson.Types as X hiding
     ( Options
     , Parser
     , (.=)
+    , parse
+    , Result
     )
 
 import qualified Data.Aeson.Lens as A
@@ -84,6 +89,7 @@ import Control.Lens.Type
 
 type AesonOptions = A.Options
 type AesonParser = A.Parser
+type AesonResult = A.Result
 
 type CsvParser = C.Parser
 type CsvField = C.Field
@@ -128,4 +134,8 @@ decodeProtoBuf = P.decode
 aesonMembers :: AsValue t => IndexedTraversal' Text t Value
 aesonMembers = A.members
 {-# INLINE aesonMembers #-}
+
+runAesonParse :: (a -> AesonParser b) -> a -> AesonResult b
+runAesonParse = A.parse
+{-# INLINE runAesonParse #-}
 

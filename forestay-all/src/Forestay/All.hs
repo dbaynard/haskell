@@ -7,3 +7,8 @@ module Forestay.All (
 import Forestay as X
 import Forestay.Serial as X
 import Forestay.Containers as X
+
+import Text.ReadP as X hiding
+    ( text
+    , try
+    )

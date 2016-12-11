@@ -17,6 +17,7 @@ library:
   - base >=4.9 && <5
   - forestay
   - forestay-serial
+  - readp
 tests:
   forestay-data-test:
     main: Spec.hs
