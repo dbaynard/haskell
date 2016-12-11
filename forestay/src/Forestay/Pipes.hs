@@ -120,6 +120,10 @@ import Pipes.Text as X hiding
     , unwords
     , word
     , words
+    -- Not quite conflicting
+    , toCaseFold
+    , toLower
+    , toUpper
     )
 
 import qualified Pipes.ByteString as PB
@@ -173,6 +177,10 @@ import Pipes.ByteString as X hiding
     , unwords
     , word
     , words
+    -- Not 'clashing', but anyway
+    , chunksOf'
+    , count
+    , elemIndex
     )
 
 --------------------------------------------------
@@ -274,4 +282,384 @@ stdinB = PB.stdin
 stdoutB :: MonadIO m => Consumer' ByteString m ()
 stdoutB = PB.stdout
 {-# INLINE stdoutB #-}
+
+allB :: Monad m => (Word8 -> Bool) -> Producer ByteString m () -> m Bool
+allB = PB.all
+{-# INLINE allB #-}
+
+anyB :: Monad m => (Word8 -> Bool) -> Producer ByteString m () -> m Bool
+anyB = PB.any
+{-# INLINE anyB #-}
+
+breakB :: Monad m => (Word8 -> Bool) -> Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+breakB = PB.break
+{-# INLINE breakB #-}
+
+chunksOfB :: (Monad m, Integral n) => n -> Producer ByteString m x :~> FreeT (Producer ByteString m) m x
+chunksOfB = PB.chunksOf
+{-# INLINE chunksOfB #-}
+
+chunksOfB' :: (Monad m, Integral n) => n -> Producer ByteString m r -> Producer ByteString m r
+chunksOfB' = PB.chunksOf'
+{-# INLINE chunksOfB' #-}
+
+concatMapB :: Monad m => (Word8 -> ByteString) -> Pipe ByteString ByteString m r
+concatMapB = PB.concatMap
+{-# INLINE concatMapB #-}
+
+countB :: (Monad m, Num n) => Word8 -> Producer ByteString m () -> m n
+countB = PB.count
+{-# INLINE countB #-}
+
+dropB :: (Monad m, Integral n) => n -> Producer ByteString m r -> Producer ByteString m r
+dropB = PB.drop
+{-# INLINE dropB #-}
+
+dropWhileB :: Monad m => (Word8 -> Bool) -> Producer ByteString m r -> Producer ByteString m r
+dropWhileB = PB.dropWhile
+{-# INLINE dropWhileB #-}
+
+elemB :: Monad m => Word8 -> Producer ByteString m () -> m Bool
+elemB = PB.elem
+{-# INLINE elemB #-}
+
+elemIndexB :: (Monad m, Num n) => Word8 -> Producer ByteString m () -> m (Maybe n)
+elemIndexB = PB.elemIndex
+{-# INLINE elemIndexB #-}
+
+elemIndicesB :: (Monad m, Num n) => Word8 -> Pipe ByteString n m r
+elemIndicesB = PB.elemIndices
+{-# INLINE elemIndicesB #-}
+
+filterB :: Monad m => (Word8 -> Bool) -> Pipe ByteString ByteString m r
+filterB = PB.filter
+{-# INLINE filterB #-}
+
+findB :: Monad m => (Word8 -> Bool) -> Producer ByteString m () -> m (Maybe Word8)
+findB = PB.find
+{-# INLINE findB #-}
+
+findIndexB :: (Monad m, Num n) => (Word8 -> Bool) -> Producer ByteString m () -> m (Maybe n)
+findIndexB = PB.findIndex
+{-# INLINE findIndexB #-}
+
+findIndicesB :: (Monad m, Num n) => (Word8 -> Bool) -> Pipe ByteString n m r
+findIndicesB = PB.findIndices
+{-# INLINE findIndicesB #-}
+
+fromHandleB :: MonadIO m => Handle -> Producer' ByteString m ()
+fromHandleB = PB.fromHandle
+{-# INLINE fromHandleB #-}
+
+fromLazyB :: Monad m => LByteString -> Producer' ByteString m ()
+fromLazyB = PB.fromLazy
+{-# INLINE fromLazyB #-}
+
+groupB :: Monad m => Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+groupB = PB.group
+{-# INLINE groupB #-}
+
+groupByB :: Monad m => (Word8 -> Word8 -> Bool) -> Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+groupByB = PB.groupBy
+{-# INLINE groupByB #-}
+
+groupsB :: Monad m => Producer ByteString m x :~> FreeT (Producer ByteString m) m x
+groupsB = PB.groups
+{-# INLINE groupsB #-}
+
+groupsByB :: Monad m => (Word8 -> Word8 -> Bool) -> Producer ByteString m x :~> FreeT (Producer ByteString m) m x
+groupsByB = PB.groupsBy
+{-# INLINE groupsByB #-}
+
+headB :: Monad m => Producer ByteString m () -> m (Maybe Word8)
+headB = PB.head
+{-# INLINE headB #-}
+
+indexB :: (Monad m, Integral n) => n -> Producer ByteString m () -> m (Maybe Word8)
+indexB = PB.index
+{-# INLINE indexB #-}
+
+intersperseB :: Monad m => Word8 -> Producer ByteString m r -> Producer ByteString m r
+intersperseB = PB.intersperse
+{-# INLINE intersperseB #-}
+
+lastB :: Monad m => Producer ByteString m () -> m (Maybe Word8)
+lastB = PB.last
+{-# INLINE lastB #-}
+
+lengthB :: (Monad m, Num n) => Producer ByteString m () -> m n
+lengthB = PB.length
+{-# INLINE lengthB #-}
+
+lineB :: Monad m => Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+lineB = PB.line
+{-# INLINE lineB #-}
+
+linesB :: Monad m => Producer ByteString m x :~> FreeT (Producer ByteString m) m x
+linesB = PB.lines
+{-# INLINE linesB #-}
+
+mapB :: Monad m => (Word8 -> Word8) -> Pipe ByteString ByteString m r
+mapB = PB.map
+{-# INLINE mapB #-}
+
+maximumB :: Monad m => Producer ByteString m () -> m (Maybe Word8)
+maximumB = PB.maximum
+{-# INLINE maximumB #-}
+
+minimumB :: Monad m => Producer ByteString m () -> m (Maybe Word8)
+minimumB = PB.minimum
+{-# INLINE minimumB #-}
+
+notElemB :: Monad m => Word8 -> Producer ByteString m () -> m Bool
+notElemB = PB.notElem
+{-# INLINE notElemB #-}
+
+nullB :: Monad m => Producer ByteString m () -> m Bool
+nullB = PB.null
+{-# INLINE nullB #-}
+
+packB :: Monad m => Producer Word8 m x :~> Producer ByteString m x
+packB = PB.pack
+{-# INLINE packB #-}
+
+scanB :: Monad m => (Word8 -> Word8 -> Word8) -> Word8 -> Pipe ByteString ByteString m r
+scanB = PB.scan
+{-# INLINE scanB #-}
+
+spanB :: Monad m => (Word8 -> Bool) -> Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+spanB = PB.span
+{-# INLINE spanB #-}
+
+splitAtB :: (Monad m, Integral n) => n -> Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+splitAtB = PB.splitAt
+{-# INLINE splitAtB #-}
+
+splitsB :: Monad m => Word8 -> Producer ByteString m x :~> FreeT (Producer ByteString m) m x
+splitsB = PB.splits
+{-# INLINE splitsB #-}
+
+splitsWithB :: Monad m => (Word8 -> Bool) -> Producer ByteString m x -> FreeT (Producer ByteString m) m x
+splitsWithB = PB.splitsWith
+{-# INLINE splitsWithB #-}
+
+takeB :: (Monad m, Integral n) => n -> Pipe ByteString ByteString m ()
+takeB = PB.take
+{-# INLINE takeB #-}
+
+takeWhileB :: Monad m => (Word8 -> Bool) -> Pipe ByteString ByteString m ()
+takeWhileB = PB.takeWhile
+{-# INLINE takeWhileB #-}
+
+toHandleB :: MonadIO m => Handle -> Consumer' ByteString m r
+toHandleB = PB.toHandle
+{-# INLINE toHandleB #-}
+
+toLazyB :: Producer ByteString Identity () -> LByteString
+toLazyB = PB.toLazy
+{-# INLINE toLazyB #-}
+
+toLazyMB :: Monad m => Producer ByteString m () -> m LByteString
+toLazyMB = PB.toLazyM
+{-# INLINE toLazyMB #-}
+
+unlinesB :: Monad m => FreeT (Producer ByteString m) m x :~> Producer ByteString m x
+unlinesB = PB.unlines
+{-# INLINE unlinesB #-}
+
+unpackB :: Monad m => Producer ByteString m x :~> Producer Word8 m x
+unpackB = PB.unpack
+{-# INLINE unpackB #-}
+
+unwordsB :: Monad m => FreeT (Producer ByteString m) m x -> Producer ByteString m x
+unwordsB = PB.unwords
+{-# INLINE unwordsB #-}
+
+wordB :: Monad m => Producer ByteString m x :~> Producer ByteString m (Producer ByteString m x)
+wordB = PB.word
+{-# INLINE wordB #-}
+
+wordsB :: Monad m => Producer ByteString m x -> FreeT (Producer ByteString m) m x
+wordsB = PB.words
+{-# INLINE wordsB #-}
+
+--------------------------------------------------
+-- * Text
+--------------------------------------------------
+
+allT :: (Monad m) => (Char -> Bool) -> Producer Text m () -> m Bool
+allT = PT.all
+{-# INLINE allT #-}
+
+anyT :: (Monad m) => (Char -> Bool) -> Producer Text m () -> m Bool
+anyT = PT.any
+{-# INLINE anyT #-}
+
+breakT :: (Monad m) => (Char -> Bool) -> Producer Text m r :~> Producer Text m (Producer Text m r)
+breakT = PT.break
+{-# INLINE breakT #-}
+
+chunksOfT :: (Monad m, Integral n) => n -> Producer Text m r :~> FreeT (Producer Text m) m r
+chunksOfT = PT.chunksOf
+{-# INLINE chunksOfT #-}
+
+concatMapT :: (Monad m) => (Char -> Text) -> Pipe Text Text m r
+concatMapT = PT.concatMap
+{-# INLINE concatMapT #-}
+
+dropT :: (Monad m, Integral n) => n -> Producer Text m r -> Producer Text m r
+dropT = PT.drop
+{-# INLINE dropT #-}
+
+dropWhileT :: (Monad m) => (Char -> Bool) -> Producer Text m r -> Producer Text m r
+dropWhileT = PT.dropWhile
+{-# INLINE dropWhileT #-}
+
+filterT :: (Monad m) => (Char -> Bool) -> Pipe Text Text m r
+filterT = PT.filter
+{-# INLINE filterT #-}
+
+findT :: (Monad m) => (Char -> Bool) -> Producer Text m () -> m (Maybe Char)
+findT = PT.find
+{-# INLINE findT #-}
+
+fromLazyT :: (Monad m) => LText -> Producer' Text m ()
+fromLazyT = PT.fromLazy
+{-# INLINE fromLazyT #-}
+
+groupT :: Monad m => Producer Text m r :~> Producer Text m (Producer Text m r)
+groupT = PT.group
+{-# INLINE groupT #-}
+
+groupByT :: (Monad m) => (Char -> Char -> Bool) -> Producer Text m r :~> Producer Text m (Producer Text m r)
+groupByT = PT.groupBy
+{-# INLINE groupByT #-}
+
+groupsT :: Monad m => Producer Text m x :~> FreeT (Producer Text m) m x
+groupsT = PT.groups
+{-# INLINE groupsT #-}
+
+groupsByT :: Monad m => (Char -> Char -> Bool) -> Producer Text m x :~> FreeT (Producer Text m) m x
+groupsByT = PT.groupsBy
+{-# INLINE groupsByT #-}
+
+headT :: (Monad m) => Producer Text m () -> m (Maybe Char)
+headT = PT.head
+{-# INLINE headT #-}
+
+indexT :: (Monad m, Integral a) => a-> Producer Text m () -> m (Maybe Char)
+indexT = PT.index
+{-# INLINE indexT #-}
+
+intercalateT :: (Monad m) => Producer Text m () -> FreeT (Producer Text m) m r -> Producer Text m r
+intercalateT = PT.intercalate
+{-# INLINE intercalateT #-}
+
+intersperseT :: (Monad m) => Char -> Producer Text m r -> Producer Text m r
+intersperseT = PT.intersperse
+{-# INLINE intersperseT #-}
+
+lastT :: (Monad m) => Producer Text m () -> m (Maybe Char)
+lastT = PT.last
+{-# INLINE lastT #-}
+
+lengthT :: (Monad m, Num n) => Producer Text m () -> m n
+lengthT = PT.length
+{-# INLINE lengthT #-}
+
+lineT :: (Monad m) => Producer Text m r :~> Producer Text m (Producer Text m r)
+lineT = PT.line
+{-# INLINE lineT #-}
+
+linesT :: (Monad m) => Producer Text m r :~>  FreeT (Producer Text m) m r
+linesT = PT.lines
+{-# INLINE linesT #-}
+
+mapT :: (Monad m) => (Char -> Char) -> Pipe Text Text m r
+mapT = PT.map
+{-# INLINE mapT #-}
+
+maximumT :: (Monad m) => Producer Text m () -> m (Maybe Char)
+maximumT = PT.maximum
+{-# INLINE maximumT #-}
+
+minimumT :: (Monad m) => Producer Text m () -> m (Maybe Char)
+minimumT = PT.minimum
+{-# INLINE minimumT #-}
+
+nullT :: (Monad m) => Producer Text m () -> m Bool
+nullT = PT.null
+{-# INLINE nullT #-}
+
+packT :: Monad m => Producer Char m r :~> Producer Text m r
+packT = PT.pack
+{-# INLINE packT #-}
+
+scanT :: (Monad m) => (Char -> Char -> Char) -> Char -> Pipe Text Text m r
+scanT = PT.scan
+{-# INLINE scanT #-}
+
+spanT :: (Monad m) => (Char -> Bool) -> Producer Text m r :~> Producer Text m (Producer Text m r)
+spanT = PT.span
+{-# INLINE spanT #-}
+
+splitAtT :: (Monad m, Integral n) => n -> Producer Text m r :~> Producer Text m (Producer Text m r)
+splitAtT = PT.splitAt
+{-# INLINE splitAtT #-}
+
+splitsT :: (Monad m) => Char -> Producer Text m r :~> FreeT (Producer Text m) m r
+splitsT = PT.splits
+{-# INLINE splitsT #-}
+
+splitsWithT :: (Monad m) => (Char -> Bool) -> Producer Text m r -> FreeT (Producer Text m) m r
+splitsWithT = PT.splitsWith
+{-# INLINE splitsWithT #-}
+
+takeT :: (Monad m, Integral a) => a -> Pipe Text Text m ()
+takeT = PT.take
+{-# INLINE takeT #-}
+
+takeWhileT :: (Monad m) => (Char -> Bool) -> Pipe Text Text m ()
+takeWhileT = PT.takeWhile
+{-# INLINE takeWhileT #-}
+
+toCaseFoldT :: Monad m => Pipe Text Text m r
+toCaseFoldT = PT.toCaseFold
+{-# INLINE toCaseFoldT #-}
+
+toLazyT :: Producer Text Identity () -> LText
+toLazyT = PT.toLazy
+{-# INLINE toLazyT #-}
+
+toLazyMT :: (Monad m) => Producer Text m () -> m LText
+toLazyMT = PT.toLazyM
+{-# INLINE toLazyMT #-}
+
+toLowerT :: Monad m => Pipe Text Text m r
+toLowerT = PT.toLower
+{-# INLINE toLowerT #-}
+
+toUpperT :: Monad m => Pipe Text Text m r
+toUpperT = PT.toUpper
+{-# INLINE toUpperT #-}
+
+unlinesT :: Monad m => FreeT (Producer Text m) m r :~> Producer Text m r
+unlinesT = PT.unlines
+{-# INLINE unlinesT #-}
+
+unpackT :: Monad m => Producer Text m r :~> Producer Char m r
+unpackT = PT.unpack
+{-# INLINE unpackT #-}
+
+unwordsT :: Monad m => FreeT (Producer Text m) m r :~> Producer Text m r
+unwordsT = PT.unwords
+{-# INLINE unwordsT #-}
+
+wordT :: (Monad m) => Producer Text m r :~> Producer Text m (Producer Text m r)
+wordT = PT.word
+{-# INLINE wordT #-}
+
+wordsT :: (Monad m) => Producer Text m r :~> FreeT (Producer Text m) m r
+wordsT = PT.words
+{-# INLINE wordsT #-}
 
