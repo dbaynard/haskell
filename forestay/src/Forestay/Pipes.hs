@@ -51,9 +51,9 @@ import Pipes.Prelude as X hiding
     , or
     , print
     , product
-    , replicateM
     , read
     , readLn
+    , replicateM
     , seq
     , sequence
     , show
@@ -64,7 +64,24 @@ import Pipes.Prelude as X hiding
     , unfoldr
     , zip
     , zipWith
+    -- not quite clashing
+    , elemIndices
+    , findIndex
+    , findIndices
+    , fold'
+    , foldM'
+    , last
+    , repeatM
+    , scan
+    , scanM
+    , takeWhile
+    , toListM
+    , toListM'
+    -- , stdinLn :: MonadIO m => Producer' String m ()
+    -- , stdoutLn :: MonadIO m => Consumer' String m ()
+    -- , stdoutLn' :: MonadIO m => Consumer' String m r
     )
+
 
 import qualified Pipes.Parse as Pipes
 import Pipes.Parse as X hiding
@@ -270,6 +287,198 @@ peekP = Pipes.peek
 isEndOfInputP :: Monad m => Parser a m Bool
 isEndOfInputP = Pipes.isEndOfInput
 {-# INLINE isEndOfInputP #-}
+
+--------------------------------------------------
+-- * Prelude
+--------------------------------------------------
+
+allP :: Monad m => (a -> Bool) -> Producer a m () -> m Bool
+allP = Pipes.all
+{-# INLINE allP #-}
+
+andP :: Monad m => Producer Bool m () -> m Bool
+andP = Pipes.and
+{-# INLINE andP #-}
+
+anyP :: Monad m => (a -> Bool) -> Producer a m () -> m Bool
+anyP = Pipes.any
+{-# INLINE anyP #-}
+
+concatP :: (Monad m, Foldable f) => Pipe (f a) a m r
+concatP = Pipes.concat
+{-# INLINE concatP #-}
+
+dropP :: Monad m => Int -> Pipe a a m r
+dropP = Pipes.drop
+{-# INLINE dropP #-}
+
+dropWhileP :: Monad m => (a -> Bool) -> Pipe a a m r
+dropWhileP = Pipes.dropWhile
+{-# INLINE dropWhileP #-}
+
+elemP :: (Monad m, Eq a) => a -> Producer a m () -> m Bool
+elemP = Pipes.elem
+{-# INLINE elemP #-}
+
+elemIndicesP :: (Monad m, Eq a) => a -> Pipe a Int m r
+elemIndicesP = Pipes.elemIndices
+{-# INLINE elemIndicesP #-}
+
+filterP :: Monad m => (a -> Bool) -> Pipe a a m r
+filterP = Pipes.filter
+{-# INLINE filterP #-}
+
+filterMP :: Monad m => (a -> m Bool) -> Pipe a a m r
+filterMP = Pipes.filterM
+{-# INLINE filterMP #-}
+
+findP :: Monad m => (a -> Bool) -> Producer a m () -> m (Maybe a)
+findP = Pipes.find
+{-# INLINE findP #-}
+
+findIndexP :: Monad m => (a -> Bool) -> Producer a m () -> m (Maybe Int)
+findIndexP = Pipes.findIndex
+{-# INLINE findIndexP #-}
+
+findIndicesP :: Monad m => (a -> Bool) -> Pipe a Int m r
+findIndicesP = Pipes.findIndices
+{-# INLINE findIndicesP #-}
+
+foldP :: Monad m => (x -> a -> x) -> x -> (x -> b) -> Producer a m () -> m b
+foldP = Pipes.fold
+{-# INLINE foldP #-}
+
+fold'P :: Monad m => (x -> a -> x) -> x -> (x -> b) -> Producer a m r -> m (b, r)
+fold'P = Pipes.fold'
+{-# INLINE fold'P #-}
+
+foldMP :: Monad m => (x -> a -> m x) -> m x -> (x -> m b) -> Producer a m () -> m b
+foldMP = Pipes.foldM
+{-# INLINE foldMP #-}
+
+foldM'P :: Monad m => (x -> a -> m x) -> m x -> (x -> m b) -> Producer a m r -> m (b, r)
+foldM'P = Pipes.foldM'
+{-# INLINE foldM'P #-}
+
+headP :: Monad m => Producer a m () -> m (Maybe a)
+headP = Pipes.head
+{-# INLINE headP #-}
+
+indexP :: Monad m => Int -> Producer a m () -> m (Maybe a)
+indexP = Pipes.index
+{-# INLINE indexP #-}
+
+lastP :: Monad m => Producer a m () -> m (Maybe a)
+lastP = Pipes.last
+{-# INLINE lastP #-}
+
+lengthP :: Monad m => Producer a m () -> m Int
+lengthP = Pipes.length
+{-# INLINE lengthP #-}
+
+mapP :: Monad m => (a -> b) -> Pipe a b m r
+mapP = Pipes.map
+{-# INLINE mapP #-}
+
+mapMP :: Monad m => (a -> m b) -> Pipe a b m r
+mapMP = Pipes.mapM
+{-# INLINE mapMP #-}
+
+mapM_P :: Monad m => (a -> m ()) -> Consumer' a m r
+mapM_P = Pipes.mapM_
+{-# INLINE mapM_P #-}
+
+maximumP :: (Monad m, Ord a) => Producer a m () -> m (Maybe a)
+maximumP = Pipes.maximum
+{-# INLINE maximumP #-}
+
+minimumP :: (Monad m, Ord a) => Producer a m () -> m (Maybe a)
+minimumP = Pipes.minimum
+{-# INLINE minimumP #-}
+
+notElemP :: (Monad m, Eq a) => a -> Producer a m () -> m Bool
+notElemP = Pipes.notElem
+{-# INLINE notElemP #-}
+
+nullP :: Monad m => Producer a m () -> m Bool
+nullP = Pipes.null
+{-# INLINE nullP #-}
+
+orP :: Monad m => Producer Bool m () -> m Bool
+orP = Pipes.or
+{-# INLINE orP #-}
+
+printP :: (MonadIO m, Show a) => Consumer' a m r
+printP = Pipes.print
+{-# INLINE printP #-}
+
+productP :: (Monad m, Num a) => Producer a m () -> m a
+productP = Pipes.product
+{-# INLINE productP #-}
+
+readP :: (Monad m, Read a) => Pipe String a m r
+readP = Pipes.read
+{-# INLINE readP #-}
+
+readLnP :: (MonadIO m, Read a) => Producer' a m ()
+readLnP = Pipes.readLn
+{-# INLINE readLnP #-}
+
+repeatMP :: Monad m => m a -> Producer' a m r
+repeatMP = Pipes.repeatM
+{-# INLINE repeatMP #-}
+
+replicateMP :: Monad m => Int -> m a -> Producer' a m ()
+replicateMP = Pipes.replicateM
+{-# INLINE replicateMP #-}
+
+scanP :: Monad m => (x -> a -> x) -> x -> (x -> b) -> Pipe a b m r
+scanP = Pipes.scan
+{-# INLINE scanP #-}
+
+scanMP :: Monad m => (x -> a -> m x) -> m x -> (x -> m b) -> Pipe a b m r
+scanMP = Pipes.scanM
+{-# INLINE scanMP #-}
+
+seqP :: Monad m => Pipe a a m r
+seqP = Pipes.seq
+{-# INLINE seqP #-}
+
+sequenceP :: Monad m => Pipe (m a) a m r
+sequenceP = Pipes.sequence
+{-# INLINE sequenceP #-}
+
+sumP :: (Monad m, Num a) => Producer a m () -> m a
+sumP = Pipes.sum
+{-# INLINE sumP #-}
+
+takeP :: Monad m => Int -> Pipe a a m ()
+takeP = Pipes.take
+{-# INLINE takeP #-}
+
+takeWhileP :: Monad m => (a -> Bool) -> Pipe a a m ()
+takeWhileP = Pipes.takeWhile
+{-# INLINE takeWhileP #-}
+
+takeWhile'P :: Monad m => (a -> Bool) -> Pipe a a m a
+takeWhile'P = Pipes.takeWhile'
+{-# INLINE takeWhile'P #-}
+
+toListP :: Producer a Identity () -> [a]
+toListP = Pipes.toList
+{-# INLINE toListP #-}
+
+toListMP :: Monad m => Producer a m () -> m [a]
+toListMP = Pipes.toListM
+{-# INLINE toListMP #-}
+
+toListM'P :: Monad m => Producer a m r -> m ([a], r)
+toListM'P = Pipes.toListM'
+{-# INLINE toListM'P #-}
+
+zipP :: Monad m => Producer a m r -> Producer b m r -> Producer' (a, b) m r
+zipP = Pipes.zip
+{-# INLINE zipP #-}
 
 --------------------------------------------------
 -- * ByteString
