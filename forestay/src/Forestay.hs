@@ -49,6 +49,8 @@ import qualified ReadArgs
     , name
     )
 
+import Data.Monoid.Instances.ByteString.UTF8 as X
+
 ether :: Coercible a (DispatchT ('TagAttach tag) m b) => proxy tag -> a -> m b
 ether tag = tagAttach tag . coerce
 {-# INLINE ether #-}

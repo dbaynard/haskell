@@ -17,6 +17,7 @@ library:
   - Forestay.Lens
   - Forestay.ListT
   - Forestay.Pipes
+  - Forestay.Textual
   #reexported-modules:
   #- Pipes.Text
   #- Pipes.ByteString
@@ -45,6 +46,7 @@ library:
   - lens
   - lens-datetime
   - list-transformer
+  - monoid-subclasses
   - pipes
   - pipes-bytestring
   - pipes-parse
