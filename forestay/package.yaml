@@ -13,6 +13,7 @@ library:
   ghc-options: -Wall
   exposed-modules:
   - Forestay
+  - Forestay.ByteString
   - Forestay.Containers
   - Forestay.Lens
   - Forestay.ListT
@@ -38,6 +39,7 @@ library:
   - base >=4.9 && <5
   - forestay-data
   - ReadArgs
+  - bytestring
   - chunked-data
   - containers
   - errors
