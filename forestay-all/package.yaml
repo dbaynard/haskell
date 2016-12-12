@@ -16,6 +16,7 @@ library:
   dependencies:
   - base >=4.9 && <5
   - forestay
+  - forestay-data
   - forestay-serial
   - readp
 tests:
