@@ -1,0 +1,31 @@
+name: read-qq
+version: '0.1.0.0'
+synopsis: A quasiquoter to read static values
+description: Please see README.md
+category: Prelude
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2016 David Baynard
+license: Apache
+github: dbaynard/haskell
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Text.Read.QQ
+  dependencies:
+  - base >=4.9 && <5
+  - template-haskell
+tests:
+  read-qq-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - hspec
+    - read-qq
