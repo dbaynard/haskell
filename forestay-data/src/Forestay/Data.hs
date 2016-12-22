@@ -7,6 +7,8 @@ module Forestay.Data (
   , foldm
   , id
   , liftMaybe
+  , liftEither
+  , liftEither'
   , parseDefaultTime
 )   where
 
@@ -72,3 +74,10 @@ liftMaybe :: Alternative f => Maybe a -> f a
 liftMaybe = maybe empty pure
 {-# INLINE liftMaybe #-}
 
+liftEither :: MonadError e m => Either e a -> m a
+liftEither = throwError `either` pure
+{-# INLINE liftEither #-}
+
+liftEither' :: Alternative f => Either b a -> f a
+liftEither' = const empty `either` pure
+{-# INLINE liftEither' #-}
