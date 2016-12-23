@@ -5,13 +5,9 @@ module Forestay.Serial (
     module X
   , AesonOptions
   , AesonParser
-  , CsvField
-  , CsvParser
   , ProtoField
   , ProtoVal
   , YamlParser
-  , encodeCSV
-  , decodeCSV
   , encodeJSON
   , decodeJSON
   , encodeYaml
@@ -24,6 +20,7 @@ module Forestay.Serial (
 
 import Forestay.Data
 import Forestay.Serial.MessagePack as X
+import Forestay.Serial.Csv as X
 
 import qualified Data.Aeson as A
 import Data.Aeson as X hiding
@@ -46,17 +43,6 @@ import qualified Data.Aeson.Lens as A
     )
 import Data.Aeson.Lens as X hiding
     ( members
-    )
-
-import qualified Data.Csv as C
-import Data.Csv as X hiding
-    ( encode
-    , decode
-    , Parser
-    , Field
-    , (.:)
-    , (.=)
-    , index
     )
 
 import qualified Data.ProtocolBuffers as P
@@ -91,21 +77,10 @@ type AesonOptions = A.Options
 type AesonParser = A.Parser
 type AesonResult = A.Result
 
-type CsvParser = C.Parser
-type CsvField = C.Field
-
 type ProtoVal = P.Value
 type ProtoField = P.Field
 
 type YamlParser = Y.Parser
-
-encodeCSV :: ToRecord a => [a] -> LByteString
-encodeCSV = C.encode
-{-# INLINE encodeCSV #-}
-
-decodeCSV :: FromRecord a => HasHeader -> LByteString -> Either String (Vector a)
-decodeCSV = C.decode
-{-# INLINE decodeCSV #-}
 
 encodeJSON :: ToJSON a => a -> LByteString
 encodeJSON = A.encode

@@ -41,6 +41,7 @@ library
   exposed-modules:
       Forestay.Serial
   other-modules:
+      Forestay.Serial.Csv
       Forestay.Serial.MessagePack
       Paths_forestay_serial
   default-language: Haskell2010
