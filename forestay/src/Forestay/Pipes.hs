@@ -77,6 +77,7 @@ import Pipes.Prelude as X hiding
     , takeWhile
     , toListM
     , toListM'
+    , fromHandle
     -- , stdinLn :: MonadIO m => Producer' String m ()
     -- , stdoutLn :: MonadIO m => Consumer' String m ()
     -- , stdoutLn' :: MonadIO m => Consumer' String m r
@@ -158,7 +159,6 @@ import Pipes.ByteString as X hiding
     , find
     , findIndex
     , findIndices
-    , fromHandle
     , fromLazy
     , group
     , groupBy
