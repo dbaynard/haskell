@@ -84,6 +84,10 @@ import Pipes.Prelude as X hiding
     -- , stdoutLn' :: MonadIO m => Consumer' String m r
     )
 
+import Pipes.Lift as X
+    ( distribute
+    , liftCatchError
+    )
 
 import qualified Pipes.Parse as Pipes
 import Pipes.Parse as X hiding
