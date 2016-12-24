@@ -222,7 +222,18 @@ embedM = Pipes.embed
     -> (a -> PProxy x' x b' b m a')
     -> a -> PProxy x' x c' c m a'
 (<~~) = (Pipes.<~)
+infixl 4 <~~
 {-# INLINE (<~~) #-}
+
+(>->>) :: Monad m => Producer a m x -> Parser a m r -> m r
+(>->>) = flip Pipes.evalStateT
+infixl 8 >->>
+{-# INLINE (>->>) #-}
+
+(<<-<) :: Monad m => Parser a m r -> Producer a m x -> m r
+(<<-<) = Pipes.evalStateT
+infixl 8 <<-<
+{-# INLINE (<<-<) #-}
 
 forP :: Monad m
     => PProxy x' x c' c m a'
