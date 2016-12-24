@@ -50,7 +50,9 @@ extra-deps:
 - lifted-protolude-0.1.6
 - list-transformer-1.0.1
 #- msgpack-aeson-0.1.0.0
-- recursion-schemes-5
+- recursion-schemes-5.0.1
+- pipes-4.3.2
+- pipes-safe-2.2.5
 
 # Override default flag values for local packages and extra-deps
 flags: {}

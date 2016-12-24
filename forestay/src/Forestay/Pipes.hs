@@ -22,6 +22,7 @@ import Pipes as X hiding
     , next
     , every
     , discard
+    , embed
     )
 
 import qualified Pipes.Prelude as Pipes
@@ -205,6 +206,12 @@ import Pipes.ByteString as X hiding
 --------------------------------------------------
 
 type PProxy = Pipes.Proxy
+
+embedM :: (MMonad t, Monad n)
+       => (forall a . m a -> t n a)
+       -> t m b -> t n b
+embedM = Pipes.embed
+{-# INLINE embedM #-}
 
 (<~~) :: Monad m
     => (b -> PProxy x' x c' c m b')

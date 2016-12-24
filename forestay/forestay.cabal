@@ -50,7 +50,7 @@ library
     , lens-datetime
     , list-transformer
     , monoid-subclasses
-    , pipes
+    , pipes >= 4.3.0
     , pipes-bytestring
     , pipes-parse
     , pipes-text
