@@ -79,9 +79,10 @@ import Pipes.Prelude as X hiding
     , toListM
     , toListM'
     , fromHandle
-    -- , stdinLn :: MonadIO m => Producer' String m ()
-    -- , stdoutLn :: MonadIO m => Consumer' String m ()
-    -- , stdoutLn' :: MonadIO m => Consumer' String m r
+    , toHandle
+    , stdinLn -- :: MonadIO m => Producer' String m ()
+    , stdoutLn -- :: MonadIO m => Consumer' String m ()
+    , stdoutLn' -- :: MonadIO m => Consumer' String m r
     )
 
 import Pipes.Lift as X
@@ -191,7 +192,6 @@ import Pipes.ByteString as X hiding
     , stdout
     , take
     , takeWhile
-    , toHandle
     , toLazy
     , toLazyM
     , unlines
