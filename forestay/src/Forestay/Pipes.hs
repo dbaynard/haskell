@@ -210,6 +210,9 @@ import Pipes.ByteString as X hiding
 --------------------------------------------------
 
 type PProxy = Pipes.Proxy
+type PipesStateT = Pipes.StateT
+type Producer2 a b m r = Producer b m (Producer a m r)
+type Parser2 a b m r = forall x . Pipes.StateT (Producer a m x) (Producer b m) r
 
 embedM :: (MMonad t, Monad n)
        => (forall a . m a -> t n a)
@@ -224,6 +227,26 @@ embedM = Pipes.embed
 (<~~) = (Pipes.<~)
 infixl 4 <~~
 {-# INLINE (<~~) #-}
+
+(>-&>) :: Producer a m x -> Parser a m r -> m (r, Producer a m x)
+(>-&>) = flip Pipes.runStateT
+infixl 8 >-&>
+{-# INLINE (>-&>) #-}
+
+(<&-<) :: Parser a m r -> Producer a m x -> m (r, Producer a m x)
+(<&-<) = Pipes.runStateT
+infixl 8 <&-<
+{-# INLINE (<&-<) #-}
+
+(>-|>) :: Monad m => Producer a m x -> Parser a m r -> m (Producer a m x)
+(>-|>) = flip Pipes.execStateT
+infixl 8 >-|>
+{-# INLINE (>-|>) #-}
+
+(<|-<) :: Monad m => Parser a m r -> Producer a m x -> m (Producer a m x)
+(<|-<) = Pipes.execStateT
+infixl 8 <|-<
+{-# INLINE (<|-<) #-}
 
 (>->>) :: Monad m => Producer a m x -> Parser a m r -> m r
 (>->>) = flip Pipes.evalStateT
