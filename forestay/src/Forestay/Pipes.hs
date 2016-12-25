@@ -85,6 +85,36 @@ import Pipes.Prelude as X hiding
     , stdoutLn' -- :: MonadIO m => Consumer' String m r
     )
 
+import Pipes.Core as X
+    -- ** Respond
+    ( respond
+    , (/>/)
+    , (//>)
+    -- ** Request
+    , request
+    , (\>\)
+    , (>\\)
+    -- ** Push
+    , push
+    , (>~>)
+    , (>>~)
+    -- ** Pull
+    , pull
+    , (>+>)
+    , (+>>)
+    -- ** Reflect
+    , reflect
+    -- * Flipped operators
+    , (\<\)
+    , (/</)
+    , (<~<)
+    , (~<<)
+    , (<+<)
+    , (<\\)
+    , (//<)
+    , (<<+)
+    )
+
 import Pipes.Lift as X
     ( distribute
     , liftCatchError
