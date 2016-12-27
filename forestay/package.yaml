@@ -51,6 +51,7 @@ library:
   - monoid-subclasses
   - pipes >= 4.3.0
   - pipes-bytestring
+  - pipes-extras
   - pipes-parse
   - pipes-text
   - recursion-schemes

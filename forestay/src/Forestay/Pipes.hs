@@ -1,6 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Forestay.Pipes (
     module Forestay.Pipes
@@ -235,6 +236,8 @@ import Pipes.ByteString as X hiding
     , elemIndex
     )
 
+import qualified Pipes.Extras as PE
+
 --------------------------------------------------
 -- * Pipes
 --------------------------------------------------
@@ -242,7 +245,7 @@ import Pipes.ByteString as X hiding
 type PProxy = Pipes.Proxy
 type PipesStateT = Pipes.StateT
 type Producer2 a b m r = Producer b m (Producer a m r)
-type Parser2 a b m r = forall x . Pipes.StateT (Producer a m x) (Producer b m) r
+type Parser2 a b m r = forall x . PipesStateT (Producer a m x) (Producer b m) r
 
 embedM :: (MMonad t, Monad n)
        => (forall a . m a -> t n a)
@@ -261,56 +264,56 @@ infixl 4 <~~
 {-|
   (>-&>) :: forall a m x r . Producer a m x -> Parser a m r -> m (r, Producer a m x)
 -}
-(>-&>) :: forall s m a . s -> Pipes.StateT s m a -> m (a, s)
+(>-&>) :: forall s m a . s -> PipesStateT s m a -> m (a, s)
 (>-&>) = flip Pipes.runStateT
 infixl 8 >-&>
 {-# INLINE (>-&>) #-}
-{-# SPECIALIZE (>-&>) :: forall a m x r . Producer a m x -> Pipes.StateT (Producer a m x) m r -> m (r, Producer a m x) #-}
+{-# SPECIALIZE (>-&>) :: forall a m x r . Producer a m x -> PipesStateT (Producer a m x) m r -> m (r, Producer a m x) #-}
 
 {-|
   (<&-<) :: forall a m x r . Parser a m r -> Producer a m x -> m (r, Producer a m x)
 -}
-(<&-<) :: forall s m a . Pipes.StateT s m a -> s -> m (a, s)
+(<&-<) :: forall s m a . PipesStateT s m a -> s -> m (a, s)
 (<&-<) = Pipes.runStateT
 infixl 8 <&-<
 {-# INLINE (<&-<) #-}
-{-# SPECIALIZE (<&-<) :: forall a m x r . Pipes.StateT (Producer a m x) m r -> Producer a m x -> m (r, Producer a m x) #-}
+{-# SPECIALIZE (<&-<) :: forall a m x r . PipesStateT (Producer a m x) m r -> Producer a m x -> m (r, Producer a m x) #-}
 
 {-|
   (>-|>) :: forall a m x r . Monad m => Producer a m x -> Parser a m r -> m (Producer a m x)
 -}
-(>-|>) :: forall s m a . Monad m => s -> Pipes.StateT s m a -> m s
+(>-|>) :: forall s m a . Monad m => s -> PipesStateT s m a -> m s
 (>-|>) = flip Pipes.execStateT
 infixl 8 >-|>
 {-# INLINE (>-|>) #-}
-{-# SPECIALIZE (>-|>) :: forall a m x r . Monad m => Producer a m x -> Pipes.StateT (Producer a m x) m r -> m (Producer a m x) #-}
+{-# SPECIALIZE (>-|>) :: forall a m x r . Monad m => Producer a m x -> PipesStateT (Producer a m x) m r -> m (Producer a m x) #-}
 
 {-|
   (<|-<) :: forall a m x r . Monad m => Parser a m r -> Producer a m x -> m (Producer a m x)
 -}
-(<|-<) :: forall s m a . Monad m => Pipes.StateT s m a -> s -> m s
+(<|-<) :: forall s m a . Monad m => PipesStateT s m a -> s -> m s
 (<|-<) = Pipes.execStateT
 infixl 8 <|-<
 {-# INLINE (<|-<) #-}
-{-# SPECIALIZE (<|-<) :: forall a m x r . Monad m => Pipes.StateT (Producer a m x) m r -> Producer a m x -> m (Producer a m x) #-}
+{-# SPECIALIZE (<|-<) :: forall a m x r . Monad m => PipesStateT (Producer a m x) m r -> Producer a m x -> m (Producer a m x) #-}
 
 {-|
   (>->>) :: forall a m x r . Monad m => Producer a m x -> Parser a m r -> m r
 -}
-(>->>) :: forall s m a . Monad m => s -> Pipes.StateT s m a -> m a
+(>->>) :: forall s m a . Monad m => s -> PipesStateT s m a -> m a
 (>->>) = flip Pipes.evalStateT
 infixl 8 >->>
 {-# INLINE (>->>) #-}
-{-# SPECIALIZE (>->>) :: forall a m x r . Monad m => Producer a m x -> Pipes.StateT (Producer a m x) m r -> m r #-}
+{-# SPECIALIZE (>->>) :: forall a m x r . Monad m => Producer a m x -> PipesStateT (Producer a m x) m r -> m r #-}
 
 {-|
   (<<-<) :: forall a m x r . Monad m => Parser a m r -> Producer a m x -> m r
 -}
-(<<-<) :: forall s m a . Monad m => Pipes.StateT s m a -> s -> m a
+(<<-<) :: forall s m a . Monad m => PipesStateT s m a -> s -> m a
 (<<-<) = Pipes.evalStateT
 infixl 8 <<-<
 {-# INLINE (<<-<) #-}
-{-# SPECIALIZE (<<-<) :: forall a m x r . Monad m => Pipes.StateT (Producer a m x) m r -> Producer a m x -> m r #-}
+{-# SPECIALIZE (<<-<) :: forall a m x r . Monad m => PipesStateT (Producer a m x) m r -> Producer a m x -> m r #-}
 
 forP :: Monad m
     => PProxy x' x c' c m a'
@@ -970,4 +973,42 @@ wordT = PT.word
 wordsT :: (Monad m) => Producer Text m r :~> FreeT (Producer Text m) m r
 wordsT = PT.words
 {-# INLINE wordsT #-}
+
+--------------------------------------------------
+-- * Extras
+--------------------------------------------------
+
+leftP :: Monad m => Pipe a b m r -> Pipe (Either a x) (Either b x) m r
+leftP = PE.left
+{-# INLINE leftP #-}
+
+rightP :: Monad m => Pipe a b m r -> Pipe (Either x a) (Either x b) m r
+rightP = PE.right
+{-# INLINE rightP #-}
+
+{-
+ -inputP :: Monad m => Setter (PProxy x' b y' y m r) (PProxy x' a y' y m r) a b
+ -inputP = PE.input
+ -[># INLINE inputP #<]
+ -
+ -outputP :: Monad m => Setter (PProxy x' x y' a m r) (PProxy x' x y' b m r) a b
+ -outputP = PE.output @Identity
+ -[># INLINE outputP #<]
+ -
+ -}
+checkP :: Show a => Pipe a a IO r
+checkP = PE.check
+{-# INLINE checkP #-}
+
+delayP :: Double -> Pipe a a IO r
+delayP = PE.delay
+{-# INLINE delayP #-}
+
+toProxyP :: Monad n => (forall m. Monad m => (a' -> (a -> m r) -> m r) -> (b -> (b' -> m r) -> m r) -> m r) -> PProxy a' a b' b n r
+toProxyP = PE.toProxy
+{-# INLINE toProxyP #-}
+
+fromProxyP :: Monad m => PProxy a' a b' b m r -> (a' -> (a -> m r) -> m r) -> (b -> (b' -> m r) -> m r) -> m r
+fromProxyP = PE.fromProxy
+{-# INLINE fromProxyP #-}
 
