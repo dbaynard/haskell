@@ -4,8 +4,6 @@
 
 module Forestay (
     module X
-  , ether
-  , liftEither
   , parseAnArg
   , nameAnArg
 )   where
@@ -25,21 +23,18 @@ import Forestay.Data as X hiding
     , runReader, runReaderT
     , evalState, evalStateT, runState, runStateT, execState, execStateT
     , runExcept, runExceptT
-    , liftEither -- reimplement here to use ether
+    , liftEither, liftEither' -- reimplement here to use ether
     , getLine, readFile, writeFile -- chunked-data
     )
+import Forestay.ByteString as X
 import Forestay.Error as X
+import Forestay.Ether as X
 import Forestay.Lens as X
 import Forestay.Pipes as X
-import Forestay.ByteString as X
 
-import Control.Monad.Ether as X
-import Control.Ether.Abbr as X
 import Data.Tagged as X
 
 import Data.Functor.Foldable as X
-
-import Data.Coerce (coerce)
 
 import Data.IOData as X
 
@@ -53,18 +48,6 @@ import qualified ReadArgs
     )
 
 import Data.Monoid.Instances.ByteString.UTF8 as X
-
---------------------------------------------------
--- * Ether
---------------------------------------------------
-
-ether :: Coercible a (DispatchT ('TagAttach tag) m b) => proxy tag -> a -> m b
-ether tag = tagAttach tag . coerce
-{-# INLINE ether #-}
-
-liftEither :: MonadExcept tag e m => proxy tag -> Either e a -> m a
-liftEither prx = throw prx `either` pure
-{-# INLINE liftEither #-}
 
 --------------------------------------------------
 -- * ReadArgs

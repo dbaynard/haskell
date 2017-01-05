@@ -35,6 +35,7 @@ library
       Forestay.Textual
   other-modules:
       Forestay.Error
+      Forestay.Ether
       Paths_forestay
   build-depends:
       base >=4.9 && <5

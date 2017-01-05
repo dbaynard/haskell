@@ -1,6 +1,8 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Forestay.Data (
     module X
@@ -10,6 +12,7 @@ module Forestay.Data (
   , liftEither
   , liftEither'
   , parseDefaultTime
+  , tag
 )   where
 
 import qualified Protolude.Lifted as Proto
@@ -81,3 +84,23 @@ liftEither = throwError `either` pure
 liftEither' :: Alternative f => Either b a -> f a
 liftEither' = const empty `either` pure
 {-# INLINE liftEither' #-}
+
+{-|
+  Convert a Proxy based representation to a TypeApplication based representation.
+
+  /e.g./ instead of
+
+  > throw (Proxy :: Proxy tag)
+
+  or
+
+  > throw $ Proxy @tag
+
+  write
+
+  > tag @tag throw
+-}
+tag :: forall tag t . (Proxy tag -> t) -> t
+tag = ($ Proxy @tag)
+{-# INLINE tag #-}
+
