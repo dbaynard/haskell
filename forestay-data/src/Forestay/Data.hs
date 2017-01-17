@@ -19,8 +19,24 @@ import qualified Protolude.Lifted as Proto
 import Protolude.Lifted as X hiding
     ( from
     , fold
+    -- replace Text IO with ByteString IO
+    , getLine
+    , getContents
+    , interact
+    , readFile
+    , writeFile
+    , appendFile
     )
 import Forestay.BaseNByteString as X
+
+import Data.ByteString as X
+    ( getLine
+    , getContents
+    , interact
+    , readFile
+    , writeFile
+    , appendFile
+    )
 
 import Data.String as X (fromString, IsString, String)
 

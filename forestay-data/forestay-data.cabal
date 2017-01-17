@@ -29,6 +29,7 @@ library
       base >=4.9 && <5
     , base16-bytestring
     , base64-bytestring
+    , bytestring
     , dlist
     , hashable
     , hashable-time
