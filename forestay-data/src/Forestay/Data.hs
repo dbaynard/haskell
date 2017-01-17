@@ -24,6 +24,8 @@ import Forestay.BaseNByteString as X
 
 import Data.String as X (fromString, IsString, String)
 
+import Data.Tagged as X
+
 import Data.Data as X hiding
     ( Fixity, Infix, Prefix
     , gunfold

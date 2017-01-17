@@ -25,6 +25,7 @@ library:
   - hashable-time
   - lifted-protolude
   - profunctors
+  - tagged
   - time
   - safe
   - vector

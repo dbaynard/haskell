@@ -32,8 +32,6 @@ import Forestay.Ether as X
 import Forestay.Lens as X
 import Forestay.Pipes as X
 
-import Data.Tagged as X
-
 import Data.Functor.Foldable as X
 
 import Data.IOData as X

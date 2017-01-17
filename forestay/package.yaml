@@ -55,7 +55,6 @@ library:
   - pipes-parse
   - pipes-text
   - recursion-schemes
-  - tagged
   - unordered-containers
 tests:
   forestay-test:
