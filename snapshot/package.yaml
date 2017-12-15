@@ -1,0 +1,31 @@
+name: snapshot
+version: 0.1.0.0
+synopsis: Various operations with stack snapshot.yaml files
+description: See readme
+license: BSD3
+author: David Baynard
+maintainer: davidbaynard@gmail.com
+copyright: 2017 David Baynard
+category: Development
+github: dbaynard/haskell
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  ghc-options: -Wall
+  exposed-modules:
+  - Stack.Snapshot.Simple
+
+executables:
+  snapshot:
+    source-dirs:      app
+    main:             Main.hs
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N

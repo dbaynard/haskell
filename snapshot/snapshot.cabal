@@ -1,0 +1,49 @@
+-- This file has been generated from package.yaml by hpack version 0.21.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: abb121d2456db18f3b977540241980b54bcbdd736d8aa47ce8ce61342e93681a
+
+name:           snapshot
+version:        0.1.0.0
+synopsis:       Various operations with stack snapshot.yaml files
+description:    See readme
+category:       Development
+homepage:       https://github.com/dbaynard/haskell#readme
+bug-reports:    https://github.com/dbaynard/haskell/issues
+author:         David Baynard
+maintainer:     davidbaynard@gmail.com
+copyright:      2017 David Baynard
+license:        BSD3
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/dbaynard/haskell
+
+library
+  exposed-modules:
+      Stack.Snapshot.Simple
+  other-modules:
+      Paths_snapshot
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable snapshot
+  main-is: Main.hs
+  other-modules:
+      Paths_snapshot
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010

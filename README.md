@@ -1,7 +1,7 @@
 ---
 title:  General purpose haskell packages  
 author: David Baynard  
-date:   13 Nov 2016  
+date:   15 Dec 2017  
 fontfamily:   libertine
 csl:    chemical-engineering-science.csl
 link-citations: true
@@ -37,3 +37,7 @@ This package is simply a copy of that implementation (missing a few functions) b
     import Text.ReadP
 
     _parser_ `parse` _input_
+
+# snapshot
+
+Process `snapshot.yaml` files
