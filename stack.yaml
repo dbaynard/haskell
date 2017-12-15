@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-7.1
+resolver: https://gist.github.com/dbaynard/9693107a883a6282f52f22785d0072e2/raw/74da937a563b02b58e2359351fa724eefa2d3497
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -45,14 +45,7 @@ packages:
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- aeson-1.0.2.1
-- data-msgpack-0.0.8
-- lifted-protolude-0.1.6
-- list-transformer-1.0.1
-#- msgpack-aeson-0.1.0.0
-- recursion-schemes-5.0.1
-- pipes-4.3.2
-- pipes-safe-2.2.5
+- list-transformer-1.0.3
 
 # Override default flag values for local packages and extra-deps
 flags: {}
