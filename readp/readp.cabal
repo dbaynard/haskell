@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.15.0.
+-- This file has been generated from package.yaml by hpack version 0.20.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: 89bcb9122db828a2997847254c2542a9066d61d7a2b09d5fb68343c9b4b50cf5
 
 name:           readp
 version:        0.1.0.0
@@ -47,4 +49,6 @@ test-suite readp-test
       base
     , hspec
     , readp
+  other-modules:
+      Paths_readp
   default-language: Haskell2010

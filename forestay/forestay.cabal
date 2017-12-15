@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.15.0.
+-- This file has been generated from package.yaml by hpack version 0.20.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: 0b8ae2309bfd181d806bc6f001b3850500c4a9eb6cd040a581ddea5d18249bd7
 
 name:                forestay
 version:             0.1.0.0
@@ -38,20 +40,20 @@ library
       Forestay.Ether
       Paths_forestay
   build-depends:
-      base >=4.9 && <5
-    , forestay-data
-    , ReadArgs
+      ReadArgs
+    , base >=4.9 && <5
     , bytestring
     , chunked-data
     , containers
     , errors
     , ether
+    , forestay-data
     , hashable
     , lens
     , lens-datetime
     , list-transformer
     , monoid-subclasses
-    , pipes >= 4.3.0
+    , pipes >=4.3.0
     , pipes-bytestring
     , pipes-extras
     , pipes-parse
@@ -67,7 +69,9 @@ test-suite forestay-test
   main-is: Spec.hs
   build-depends:
       base
-    , hspec
     , forestay
+    , hspec
+  other-modules:
+      Paths_forestay
   ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   default-language: Haskell2010

@@ -1,6 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.15.0.
+-- This file has been generated from package.yaml by hpack version 0.20.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: b6580de9ca4bc198472d5d6d95098681c39a5818209204874021bd35619fea51
 
 name:           forestay-all
 version:        0.1.0.0
@@ -45,6 +47,8 @@ test-suite forestay-data-test
   ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base
-    , hspec
     , forestay-all
+    , hspec
+  other-modules:
+      Paths_forestay_all
   default-language: Haskell2010
